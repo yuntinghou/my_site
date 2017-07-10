@@ -1,0 +1,102 @@
+{% extends "bootstrap/base.html" %}
+{% block styles %}
+    {{ super() }}
+    <style>
+      .bg-1 {
+          background-color: #1abc9c; /* Green */
+          color: #ffffff;
+      }
+      .bg-2 {
+          background-color: #474e5d; /* Dark Blue */
+          color: #ffffff;
+      }
+      .bg-3 {
+          background-color: #ffffff; /* White */
+          color: #555555;
+      }
+      .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+      }
+      .navbar {
+          padding-top: 15px;
+          padding-bottom: 15px;
+          border: 0;
+          border-radius: 0;
+          margin-bottom: 0;
+          font-size: 12px;
+          letter-spacing: 5px;
+      }
+      .navbar-nav  li a:hover {
+          color: #1abc9c !important;
+      }
+  </style>
+{% endblock styles %}
+
+
+{% block body %}
+
+    {% block navbar %}
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ url_for('test') }}">Me</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">WHO</a></li>
+        <li><a href="#">WHAT</a></li>
+        <li><a href="#">WHERE</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock navbar %}
+
+    <div class="container-fluid bg-1 text-center">
+        <div class="row">
+            <h3>Who Am I?</h3>
+            <img src="{{ url_for('static', filename = 'pics/bird.jpg') }}" class="img-circle" alt="Bird" width="350" height="350">
+            <h3>I'm an Leo</h3>
+        </div>
+    </div>
+    <div class="container-fluid bg-2 text-center">
+        <div class="row">
+            <h3>What Am I?</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <a href="#" class="btn btn-default btn-lg">Search</a>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-3 text-center">
+        <div class="row">
+            <h3>Where To Find Me?</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+    </div>
+    <div class="container-fluid bg-3 text-center">
+        <div class="row">
+            <h3>Where To Find Me?</h3><br>
+            <div class="row">
+            <div class="col-sm-4">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <img src="static/pics/birds1.jpg" class="img-responsive" style="width:100%" alt="Image">
+            </div>
+            <div class="col-sm-4">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <img src="static/pics/birds2.jpg" class="img-responsive" style="width:100%" alt="Image">
+            </div>
+            <div class="col-sm-4">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <img src="static/pics/birds3.jpg" class="img-responsive" style="width:100%" alt="Image">
+            </div>
+          </div>
+    </div>
+</div>
+
+{% endblock body %}
