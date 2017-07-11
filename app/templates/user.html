@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Leo's Blog - {{ user.username }}{% endblock title %}
+{% block page_header %}
+    <header class="intro-header" style="background-image: url('{{ url_for('static', filename='img/contact-bg.jpg') }}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Contact Me</h1>
+                        <hr class="small">
+                        <span class="subheading">Have questions about Leo? I have answers (maybe). LOL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock page_header %}
+{% block main_content %}
+    {{ super() }}
+    <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=256) }}">
+    <div class="page-header">
+        <h1>{{ user.username }}</h1>
+        {% if user.name or user.location %}
+        <p>
+            {% if user.name %}{{ user.name }}{% endif %}
+            {% if user.location %}
+                From <a href="http://maps.google.com/?q={{ user.location }}">{{ user.location }}</a>
+            {% endif %}
+        </p>
+        {% endif %}
+        {% if current_user.is_administrator() %}
+        <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+        {% endif %}
+        {% if user.about_me %}
+        <p>{{ user.about_me }}</p>
+        {% endif %}
+        <p>Member since {{ moment(user.member_since).format('L') }}. Last seen {{ moment(user.last_seen).fromNow() }}.</p>
+        <p>
+            {% if user  == current_user %}
+            <a class="btn btn-default" href="{{ url_for('.edit_profile') }}">Edit Profile</a>
+            {% endif %}
+            {% if current_user.is_administrator() %}
+            <a class="btn btn-danger" href="{{ url_for('.edit_profile_admin', id=user.id) }}">Edit Profile [Admin]</a>
+            {% endif %}
+        </p>
+    </div>
+    <h3>Posts by {{ user.username }}</h3>
+    {% include '_posts.html' %}
+    <div class="container">
+        <div id="map" style="width:400px;height:400px;">
+
+        </div>
+    </div>
+{% endblock main_content %}
+{% block scripts %}
+    {{ super() }}
+         <script>
+          var map;
+          function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: {lat: -34.397, lng: 150.644},
+              zoom: 8
+            });
+          }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxP2SNuNlUUxaCnBgbK6F-0Pff_1hFKug&callback=initMap" async defer></script>
+{% endblock scripts %}

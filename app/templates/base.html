@@ -27,6 +27,13 @@
                         <span class="sr-only">Toggle navigation</span>
                         Menu <i class="fa fa-bars"></i>
                     </button>
+                    {% if current_user.is_authenticated %}
+                    <li>
+                        <a class="navbar-brand" href="{{ url_for('main.user', username=current_user.username) }}">
+                            Profile
+                        </a>
+                    </li>
+                    {% endif %}
                     {% block sub_title %} {% endblock sub_title %}
                 </div>
 
@@ -50,6 +57,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ url_for('auth.change_password') }}">Change Password</a></li>
+                                    <li><a href="{{ url_for('auth.change_email_request') }}">Change Email</a></li>
                                     <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
                                 </ul>
                             </li>
